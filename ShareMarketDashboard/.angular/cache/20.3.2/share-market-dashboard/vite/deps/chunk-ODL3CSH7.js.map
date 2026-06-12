@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/@amcharts/amcharts5/.internal/charts/xy/axes/AxisLabelRadial.js"],
+  "sourcesContent": ["import { RadialLabel } from \"../../../core/render/RadialLabel\";\r\n/**\r\n * Draws a label on a circular axis.\r\n *\r\n * @see {@link https://www.amcharts.com/docs/v5/charts/xy-chart/axes/#Labels} for more info\r\n */\r\nexport class AxisLabelRadial extends RadialLabel {\r\n    constructor() {\r\n        super(...arguments);\r\n        Object.defineProperty(this, \"_tickPoints\", {\r\n            enumerable: true,\r\n            configurable: true,\r\n            writable: true,\r\n            value: []\r\n        });\r\n    }\r\n}\r\nObject.defineProperty(AxisLabelRadial, \"className\", {\r\n    enumerable: true,\r\n    configurable: true,\r\n    writable: true,\r\n    value: \"AxisLabelRadial\"\r\n});\r\nObject.defineProperty(AxisLabelRadial, \"classNames\", {\r\n    enumerable: true,\r\n    configurable: true,\r\n    writable: true,\r\n    value: RadialLabel.classNames.concat([AxisLabelRadial.className])\r\n});\r\n"],
+  "mappings": ";;;;;AAMO,IAAM,kBAAN,cAA8B,YAAY;AAAA,EAC7C,cAAc;AACV,UAAM,GAAG,SAAS;AAClB,WAAO,eAAe,MAAM,eAAe;AAAA,MACvC,YAAY;AAAA,MACZ,cAAc;AAAA,MACd,UAAU;AAAA,MACV,OAAO,CAAC;AAAA,IACZ,CAAC;AAAA,EACL;AACJ;AACA,OAAO,eAAe,iBAAiB,aAAa;AAAA,EAChD,YAAY;AAAA,EACZ,cAAc;AAAA,EACd,UAAU;AAAA,EACV,OAAO;AACX,CAAC;AACD,OAAO,eAAe,iBAAiB,cAAc;AAAA,EACjD,YAAY;AAAA,EACZ,cAAc;AAAA,EACd,UAAU;AAAA,EACV,OAAO,YAAY,WAAW,OAAO,CAAC,gBAAgB,SAAS,CAAC;AACpE,CAAC;",
+  "names": []
+}

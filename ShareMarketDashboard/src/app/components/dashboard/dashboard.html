@@ -1,0 +1,283 @@
+<header class="header">
+  <div class="header-content">
+    <div class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <h1>Share Market Demo</h1>
+    </div>
+    <div class="header-actions">
+      <div class="search-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <input placeholder="Search stocks..." class="search-box" type="text" [(ngModel)]="searchTerm" (input)="filterWatchlist()">
+      </div>
+      <div class="live-time">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+        <span>Live: {{ currentTime | date:'mediumTime' }}</span>
+      </div>
+      <button class="btn btn-sell" (click)="logout()">Sign Out</button>
+    </div>
+  </div>
+  </header>
+
+<div class= "section-wrapper">
+  <div class="ticker-container">
+    <div class="ticker">
+        <div class="stock">
+            <span class="stock-name">RELIANCE</span>
+            <span class="stock-price">₹2,523.75</span>
+            <span class="stock-change up">▲ 1.8%</span>
+        </div>
+        <div class="stock">
+            <span class="stock-name">TCS</span>
+            <span class="stock-price">₹3,742.80</span>
+            <span class="stock-change up">▲ 2.3%</span>
+        </div>
+        <div class="stock">
+            <span class="stock-name">HDFC BANK</span>
+            <span class="stock-price">₹1,634.25</span>
+            <span class="stock-change down">▼ 0.7%</span>
+        </div>
+        <div class="stock">
+            <span class="stock-name">INFY</span>
+            <span class="stock-price">₹1,523.45</span>
+            <span class="stock-change up">▲ 1.2%</span>
+        </div>
+        <div class="stock">
+            <span class="stock-name">ITC</span>
+            <span class="stock-price">₹478.90</span>
+            <span class="stock-change up">▲ 0.9%</span>
+        </div>
+        <div class="stock">
+            <span class="stock-name">BHARTIARTL</span>
+            <span class="stock-price">₹834.25</span>
+            <span class="stock-change down">▼ 1.1%</span>
+        </div>
+        <div class="stock">
+            <span class="stock-name">HINDUNILVR</span>
+            <span class="stock-price">₹2,456.80</span>
+            <span class="stock-change up">▲ 0.6%</span>
+        </div>
+        <div class="stock">
+            <span class="stock-name">ICICI BANK</span>
+            <span class="stock-price">₹912.35</span>
+            <span class="stock-change up">▲ 1.4%</span>
+        </div>
+        <div class="stock">
+          <span class="stock-name">HDFC BANK</span>
+          <span class="stock-price">₹1,634.25</span>
+          <span class="stock-change down">▼ 0.7%</span>
+      </div>
+      <div class="stock">
+          <span class="stock-name">INFY</span>
+          <span class="stock-price">₹1,523.45</span>
+          <span class="stock-change up">▲ 1.2%</span>
+      </div>
+      <div class="stock">
+          <span class="stock-name">ITC</span>
+          <span class="stock-price">₹478.90</span>
+          <span class="stock-change up">▲ 0.9%</span>
+      </div>  
+    </div>
+  </div>
+</div>
+
+<div class="section-wrapper">
+  <div class="container">
+        <section class="market-overview-card">
+      <h2 class="card-title" style="display: flex; align-items: center; gap: 5px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span>Market Overview</span>
+      </h2>
+    <div class="market-grid">
+      <div class="market-item" *ngFor="let index of marketIndices">
+        <div class="market-name">{{index.name}}</div>
+        <div class="market-value">{{formatCurrency(index.value)}}</div>
+        <div class="market-change" [ngClass]="getChangeClass(index.change)">
+          {{getChangeSymbol(index.change)}}{{index.change.toFixed(2)}} ({{getChangeSymbol(index.changePercent)}}{{index.changePercent.toFixed(2)}}%)
+        </div>
+      </div>
+    </div>
+    </section>
+  </div>
+</div>
+
+<div class="section-wrapper">
+  <div class="container">
+        <section class="two-column">
+    <div class="market-trends-card">
+      <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bar-chart-2"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
+        <span>Market Trends</span>
+      </h3>
+      <div id="chartcontrols"></div>
+      <div id="chartdiv" style="width: 100%; height: 500px;"></div>
+
+      <div style="margin-top: 20px;">
+        <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+          <span>Sector Distribution</span>
+        </h3>
+        <div echarts [options]="pieChartOption" style="height: 250px; width: 100%;"></div>
+        <div style="margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+          <div *ngFor="let sector of sectorData" style="display: flex; align-items: center; gap: 5px;">
+            <div style="width: 12px; height: 12px; border-radius: 50%;" [style.backgroundColor]="sector.color"></div>
+            <span style="font-size: 12px;">{{sector.sector}} ({{formatCurrency(sector.value)}})</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="market-news-card">
+      <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4M4 22a2 2 0 0 0 2 2h12M18 22V4M12 12H8M12 16H8M12 8H8"/></svg>
+        <span>Market News</span>
+      </h3>
+      <div *ngFor="let news of marketNewsData" class="news-item">
+        <div class="news-title">{{news.title}}</div>
+        <div class="news-time">{{news.time}} • <span [ngClass]="getChangeClass(news.impact === 'positive' ? 1 : news.impact === 'negative' ? -1 : 0)">{{news.impact}}</span></div>
+      </div>
+    </div>
+    </section>
+  </div>
+</div>
+
+<div class="section-wrapper">
+  <div class="container">
+        <section class="portfolio-card">
+    <h2 class="card-title" style="display: flex; align-items: center; gap: 5px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        <span>My Portfolio</span>
+      </h2>
+    
+    <div class="portfolio-stats">
+      <div class="stat-item">
+        <div class="stat-label">Total Investment</div>
+        <div class="stat-value">{{formatCurrency(totalInvestment)}}</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Current Value</div>
+        <div class="stat-value">{{formatCurrency(totalPortfolioValue)}}</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Total P&L</div>
+        <div class="stat-value" [ngClass]="getChangeClass(totalPnL)">{{formatCurrency(totalPnL)}}</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">P&L %</div>
+        <div class="stat-value" [ngClass]="getChangeClass(totalPnLPercent)">{{getChangeSymbol(totalPnLPercent)}}{{totalPnLPercent.toFixed(2)}}%</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Total Stocks</div>
+        <div class="stat-value">{{portfolioData.length}}</div>
+      </div>
+    </div>
+
+    <table class="holdings-table">
+      <thead>
+        <tr>
+          <th>Stock</th>
+          <th>Quantity</th>
+          <th>Avg Price</th>
+          <th>Current Price</th>
+          <th>P&L</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of portfolioData">
+          <td>
+            <div style="font-weight: 500;">{{stock.symbol}}</div>
+            <div style="font-size: 12px; color: #888;">{{stock.sector}}</div>
+          </td>
+          <td>{{stock.qty}}</td>
+          <td>{{formatCurrency(stock.avgPrice)}}</td>
+          <td>{{formatCurrency(stock.currentPrice)}}</td>
+          <td [ngClass]="getChangeClass(calculatePnL(stock.avgPrice, stock.currentPrice, stock.qty).pnl)">
+            {{getChangeSymbol(calculatePnL(stock.avgPrice, stock.currentPrice, stock.qty).pnl)}}{{formatCurrency(Math.abs(calculatePnL(stock.avgPrice, stock.currentPrice, stock.qty).pnl))}}
+            <br>
+            <span style="font-size: 12px;">({{getChangeSymbol(calculatePnL(stock.avgPrice, stock.currentPrice, stock.qty).pnlPercent)}}{{calculatePnL(stock.avgPrice, stock.currentPrice, stock.qty).pnlPercent.toFixed(1)}}%)</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </section>
+  </div>
+</div>
+
+<div class="section-wrapper">
+  <div class="container">
+        <section class="watchlist-card">
+    <h2 class="card-title" style="display: flex; align-items: center; gap: 5px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      <span>Watchlist</span>
+    </h2>
+    <div class="watchlist-grid">
+      <div class="watchlist-item" *ngFor="let stock of filteredWatchlist">
+        <div class="stock-symbol">{{stock.symbol}}</div>
+        <div class="stock-company">{{stock.company}}</div>
+        <div class="stock-price">{{formatCurrency(stock.price)}}</div>
+        <div class="stock-change" [ngClass]="getChangeClass(stock.change)">
+          {{getChangeSymbol(stock.change)}}{{formatCurrency(Math.abs(stock.change))}} ({{getChangeSymbol(stock.changePercent)}}{{stock.changePercent.toFixed(2)}}%)
+        </div>
+        <div style="margin-top: 10px; text-align: right;">
+          <button class="btn btn-buy" style="margin-right: 5px;" (click)="onBuyStock(stock)">Buy</button>
+          <button class="btn btn-sell" (click)="onRemoveFromWatchlist(stock)">Remove</button>
+        </div>
+      </div>
+    </div>
+    </section>
+  </div>
+</div>
+
+<div class="section-wrapper">
+  <div class="container">
+        <section class="top-movers-card">
+    <h2 class="card-title" style="display: flex; align-items: center; gap: 5px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+      <span>Top Movers</span>
+    </h2>
+    <div class="movers-grid">
+      <div>
+        <h4 style="color: #4caf50; margin-bottom: 15px; display: flex; align-items: center; gap: 5px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+          <span>Top Gainers</span>
+        </h4>
+        <div class="mover-item" *ngFor="let stock of topGainers; let i = index">
+          <div class="mover-rank positive">#{{i + 1}}</div>
+          <div class="mover-info">
+            <div class="mover-symbol">{{stock.symbol}}</div>
+            <div class="mover-price">{{formatCurrency(stock.price)}}</div>
+          </div>
+          <div class="mover-change positive">
+            +{{formatCurrency(stock.change)}}
+            <br>
+            <span style="font-size: 12px;">+{{stock.changePercent.toFixed(2)}}%</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4 style="color: #f44336; margin-bottom: 15px; display: flex; align-items: center; gap: 5px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-down"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline><polyline points="16 17 22 17 22 11"></polyline></svg>
+          <span>Top Losers</span>
+        </h4>
+        <div class="mover-item" *ngFor="let stock of topLosers; let i = index">
+          <div class="mover-rank negative">#{{i + 1}}</div>
+          <div class="mover-info">
+            <div class="mover-symbol">{{stock.symbol}}</div>
+            <div class="mover-price">{{formatCurrency(stock.price)}}</div>
+          </div>
+          <div class="mover-change negative">
+            {{formatCurrency(stock.change)}}
+            <br>
+            <span style="font-size: 12px;">{{stock.changePercent.toFixed(2)}}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2025 Stock Market @Sakthi</p>
+  </div>
+</footer>
